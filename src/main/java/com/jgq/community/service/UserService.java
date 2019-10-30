@@ -8,4 +8,5 @@ import com.jgq.community.model.User;
  */
 public interface UserService {
     void insertUser(User user);
+    User findUserByToken(String token);
 }
