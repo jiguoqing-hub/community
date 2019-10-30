@@ -20,12 +20,15 @@ public class IndexController {
     @GetMapping("/")
     public String index(HttpServletRequest httpServletRequest){
         Cookie[] cookies = httpServletRequest.getCookies();
-        for (Cookie cookie:cookies) {
-            if (cookie.getName().equals("token")){
-                String token = cookie.getValue();
-                User user = userService.findUserByToken(token);
-                if (user != null){
-                    httpServletRequest.getSession().setAttribute("user",user);
+        if (cookies != null){
+            for (Cookie cookie:cookies) {
+                if (cookie.getName().equals("token")){
+                    String token = cookie.getValue();
+                    User user = userService.findUserByToken(token);
+                    if (user != null){
+                        httpServletRequest.getSession().setAttribute("user",user);
+                    }
+                    break;
                 }
             }
         }
