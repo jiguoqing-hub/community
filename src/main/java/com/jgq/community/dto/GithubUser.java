@@ -5,25 +5,25 @@ package com.jgq.community.dto;
  * @date 2019/10/29 21:19
  */
 public class GithubUser {
-    private String login;
+    private String name;
     private Long id;
     private String bio;
 
     @Override
     public String toString() {
         return "GithubUser{" +
-                "login='" + login + '\'' +
+                "login='" + name + '\'' +
                 ", id=" + id +
                 ", bio='" + bio + '\'' +
                 '}';
     }
 
-    public String getLogin() {
-        return login;
+    public String getName() {
+        return name;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Long getId() {
