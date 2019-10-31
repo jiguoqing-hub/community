@@ -60,6 +60,7 @@ public class AuthorizeController {
             user.setGmtModified(user.getGmtCreate());
             httpServletResponse.addCookie(new Cookie("token",token));
             userService.insertUser(user);
+
             return "redirect:/";
         }else{
             //登录失败，返回首页
