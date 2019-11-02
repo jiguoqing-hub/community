@@ -1,6 +1,9 @@
 package com.jgq.community.service;
 
+import com.jgq.community.dto.QuestionDTO;
 import com.jgq.community.model.Question;
+
+import java.util.List;
 
 /**
  * @author JiGuoqing
@@ -8,4 +11,6 @@ import com.jgq.community.model.Question;
  */
 public interface QuestionService {
      Integer createQuestion(Question question);
+
+    List<QuestionDTO> getAll();
 }

@@ -1,13 +1,17 @@
 package com.jgq.community.controller;
 
+import com.jgq.community.dto.QuestionDTO;
 import com.jgq.community.model.User;
+import com.jgq.community.service.QuestionService;
 import com.jgq.community.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * @author JiGuoqing
@@ -17,8 +21,10 @@ import javax.servlet.http.HttpServletRequest;
 public class IndexController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private QuestionService questionService;
     @GetMapping("/")
-    public String index(HttpServletRequest httpServletRequest){
+    public String index(HttpServletRequest httpServletRequest, Model model){
         Cookie[] cookies = httpServletRequest.getCookies();
         if (cookies != null){
             for (Cookie cookie:cookies) {
@@ -32,6 +38,8 @@ public class IndexController {
                 }
             }
         }
+        List<QuestionDTO> questionDTOS = questionService.getAll();
+        model.addAttribute("questions",questionDTOS);
         return "index";
     }
 }
