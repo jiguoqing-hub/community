@@ -1,5 +1,6 @@
 package com.jgq.community.service.impl;
 
+import com.jgq.community.dto.PaginationDTO;
 import com.jgq.community.dto.QuestionDTO;
 import com.jgq.community.mapper.QuestionMapper;
 import com.jgq.community.mapper.UserMapper;
@@ -31,9 +32,13 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public List<QuestionDTO> getAll() {
-        List<Question> questionList = questionMapper.getAll();
+    public PaginationDTO getAllByPage(Integer page,Integer size) {
+        Integer offset = size*(page-1);
+        List<Question> questionList = questionMapper.getAllByPage(offset,size);
         List<QuestionDTO> questionDTOs = new ArrayList<>();
+        PaginationDTO paginationDTO = new PaginationDTO();
+        Integer totalCount = questionMapper.getCount();
+        paginationDTO.setPagination(totalCount,page,size);
         for (Question question: questionList) {
             User user = userMapper.findUserById(question.getCreator());
             QuestionDTO questionDTO = new QuestionDTO();
@@ -41,6 +46,13 @@ public class QuestionServiceImpl implements QuestionService {
             questionDTO.setUser(user);
             questionDTOs.add(questionDTO);
         }
-        return questionDTOs;
+        paginationDTO.setQuestionDTOList(questionDTOs);
+        paginationDTO.getPages();
+        return paginationDTO;
+    }
+
+    @Override
+    public Integer getCount() {
+        return questionMapper.getCount();
     }
 }

@@ -1,5 +1,6 @@
 package com.jgq.community.service;
 
+import com.jgq.community.dto.PaginationDTO;
 import com.jgq.community.dto.QuestionDTO;
 import com.jgq.community.model.Question;
 
@@ -11,6 +12,6 @@ import java.util.List;
  */
 public interface QuestionService {
      Integer createQuestion(Question question);
-
-    List<QuestionDTO> getAll();
+     PaginationDTO getAllByPage(Integer page, Integer size);
+     Integer getCount();
 }
